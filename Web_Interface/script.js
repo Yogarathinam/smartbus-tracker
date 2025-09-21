@@ -832,10 +832,9 @@ document.getElementById('heroSearch').addEventListener('keypress', function(e){
                                     </div>
                                 </div>
                             </div>
-<button class="track-button" onclick="trackBus('${result.route.number}')">
-  <i class="fa-solid fa-location-dot"></i> Track Live
-</button>
-
+                            <button class="track-button" onclick="trackBus('${result.route.number}')">
+                                📍 Track Live
+                            </button>
                         </div>
                         <div class="stops-preview">
                             <div class="stops-header">Route Preview (${result.stops.length} stops)</div>
@@ -1050,10 +1049,8 @@ function findRoutes() {
               <div class="bus-route">${result.stops[0].name} → ${result.stops[result.stops.length - 1].name}</div>
             </div>
           </div>
-<button class="track-button" onclick="trackBus('${result.route.number}')">
-  <i class="fa-solid fa-location-dot"></i> Track Live
-</button>
-
+          <button class="track-button" onclick="trackBus('${result.route.number}')">📍 Track Live</button>
+        </div>
         <div class="stops-preview">
           <div class="stops-header">Route Preview (${result.stops.length} stops)</div>
           <div class="stops-list">
@@ -1247,7 +1244,23 @@ Answer briefly and clearly in ${lang.startsWith("ta") ? "Tamil" : lang.startsWit
 
     //addition
     // Open and close feedback modal
+document.addEventListener('DOMContentLoaded', () => {
+  const feedbackBtn = document.createElement('button');
+  feedbackBtn.textContent = 'Feedback';
+  feedbackBtn.className = 'login-btn-header';
+  feedbackBtn.style.position = 'fixed';
+  feedbackBtn.style.bottom = '25px';
+  feedbackBtn.style.right = '25px';
+  feedbackBtn.style.zIndex = '10000';
+  feedbackBtn.style.transition = 'width 0.5s cubic-bezier(0.4,0,0.2,1), height 0.5s cubic-bezier(0.4,0,0.2,1), border-radius 0.5s cubic-bezier(0.4,0,0.2,1), background 0.3s ease';
+
+  feedbackBtn.style.animation = 'bounce 2.5s infinite';  // Add bounce animation
+  feedbackBtn.onclick = openFeedbackModal;
+  document.body.appendChild(feedbackBtn);
+});
+
 function openFeedbackModal() {
+  closeChatbot();
   document.getElementById('feedbackModal').style.display = 'flex';
   document.getElementById('feedbackSuccessMsg').style.display = 'none';
   document.getElementById('feedbackForm').reset();
@@ -1256,6 +1269,7 @@ function openFeedbackModal() {
 function closeFeedbackModal() {
   document.getElementById('feedbackModal').style.display = 'none';
 }
+
 
 // Submit feedback function
 function submitFeedback(event) {
@@ -1335,29 +1349,7 @@ function dismissNotification() {
 
 // Example: open feedback modal on button click
 // Hook this with your existing UI buttons
-document.addEventListener('DOMContentLoaded', () => {
-  const feedbackBtn = document.createElement('button');
-  feedbackBtn.textContent = 'Feedback';
-  feedbackBtn.className = 'login-btn-header';
-  feedbackBtn.style.position = 'fixed';
-  feedbackBtn.style.bottom = '25px';
-  feedbackBtn.style.right = '25px';
-  feedbackBtn.style.zIndex = '10000';
-  feedbackBtn.style.animation = 'bounce 2.5s infinite';  // Add bounce animation
-  feedbackBtn.onclick = openFeedbackModal;
-  document.body.appendChild(feedbackBtn);
-});
 
-function openFeedbackModal() {
-  closeChatbot();
-  document.getElementById('feedbackModal').style.display = 'flex';
-  document.getElementById('feedbackSuccessMsg').style.display = 'none';
-  document.getElementById('feedbackForm').reset();
-}
-
-function closeFeedbackModal() {
-  document.getElementById('feedbackModal').style.display = 'none';
-}
 
 
 
@@ -1463,90 +1455,85 @@ function animate() {
 }
 animate();
 
-let currentPassType = null;
 
-function openPassModal(type) {
-  currentPassType = type;
-  const modal = document.getElementById('passModal');
-  const dynamicFields = document.getElementById('dynamicPassFields');
-  const title = document.getElementById('modalTitle');
-  dynamicFields.innerHTML = '';
-  title.innerText = '';
 
-  if (type === 'monthly') {
-    title.innerText = 'Monthly Pass Application';
-    dynamicFields.innerHTML = `
-      <label>Name:</label><input name="name" type="text" required />
-      <label>Address:</label><input name="address" type="text" required />
-      <label>Pass Type:</label>
-      <select name="passType" required>
-        <option value="">Select Pass Type</option>
-        <option value="fixed">Fixed Bus Fare - 400</option>
-        <option value="all">Travel for All Bus - 1000</option>
-      </select>
-      <label>Mobile Number:</label><input name="mobile" type="tel" required />
-      <label>Attach ID Proof (Aadhar, Voter ID, PAN, etc.):</label>
-      <input type="file" name="idProof" accept=".jpg,.jpeg,.png,.pdf" required />
-    `;
-  } else if (type === 'student') {
-    title.innerText = 'Student Pass Application';
-    dynamicFields.innerHTML = `
-      <label>Name of Student:</label><input name="studentName" type="text" required />
-      <label>Address:</label><input name="address" type="text" required />
-      <label>School Name:</label><input name="schoolName" type="text" required />
-      <label>School Address:</label><input name="schoolAddress" type="text" required />
-      <label>Father's Name:</label><input name="fatherName" type="text" required />
-      <label>Father's Mobile Number:</label><input name="fatherMobile" type="tel" required />
-      <label>Attach School ID Card:</label>
-      <input type="file" name="schoolIdProof" accept=".jpg,.jpeg,.png,.pdf" required />
-    `;
-  } else if (type === 'senior') {
-    title.innerText = 'Senior Citizen Pass Application';
-    dynamicFields.innerHTML = `
-      <label>Name:</label><input name="name" type="text" required />
-      <label>Address:</label><input name="address" type="text" required />
-      <label>Age:</label><input name="age" type="number" min="60" max="120" required />
-      <label>Attach Proof of Age:</label>
-      <input type="file" name="ageProof" accept=".jpg,.jpeg,.png,.pdf" required />
-    `;
-  }
 
-  modal.style.display = 'flex';
+
+
+
+
+function openPassModal(passType) {
+document.getElementById('formSuccessMsg').style.display = 'none';
+ document.querySelectorAll('.passForm').forEach(form => form.classList.add('hidden'));
+ document.getElementById('paymentPage').classList.add('hidden');
+
+ if(passType === 'monthly') {
+ document.getElementById('monthlyForm').classList.remove('hidden');
+ document.getElementById('passModalTitle').textContent = 'Apply for Monthly Pass';
+ }
+else if(passType === 'student') {
+document.getElementById('studentForm').classList.remove('hidden');
+document.getElementById('passModalTitle').textContent = 'Apply for Student Pass';
+}
+ else if(passType === 'senior') {
+   document.getElementById('seniorForm').classList.remove('hidden');
+ document.getElementById('passModalTitle').textContent = 'Apply for Senior Citizen Pass';
+ }
+document.getElementById('passModal').classList.add('show');
 }
 
 function closePassModal() {
-  const modal = document.getElementById('passModal');
-  modal.style.display = 'none';
+document.getElementById('passModal').classList.remove('show');
+document.querySelectorAll('.passForm').forEach(form => form.reset());
 }
 
+// Monthly form submission: show payment page
+function handleMonthlySubmit(event) {
+event.preventDefault();
+
+ const type = document.getElementById('passType').value;
+ const amount = type === '400' ? 400 : 1000;
+ document.getElementById('paymentSummary').textContent = `Monthly Pass Payment: ₹${amount}`;
+
+document.getElementById('monthlyForm').classList.add('hidden');
+document.getElementById('paymentPage').classList.remove('hidden');
+}
+
+// Student form submission: show payment page
+function handleStudentSubmit(event) {
+event.preventDefault();
+
+ document.getElementById('paymentSummary').textContent = `Student Pass Payment: Discounted rate`;
+
+ document.getElementById('studentForm').classList.add('hidden');
+document.getElementById('paymentPage').classList.remove('hidden');
+}
+
+// Senior form submission: normal submit
 function submitPassForm(event) {
-  event.preventDefault();
-  const form = event.target;
-  const formData = new FormData(form);
-
-  if (currentPassType === 'senior') {
-    const age = parseInt(formData.get('age'), 10);
-    if (isNaN(age) || age < 60) {
-      alert('Senior Citizen Pass is only applicable for age 60 and above.');
-      return;
-    }
-  }
-
-  alert('Redirecting to payment page...');
-
-  closePassModal();
-
-  setTimeout(() => {
-    showBusPassConfirmation(formData);
-  }, 1000);
+ event.preventDefault();
+const form = event.target;
+ form.style.display = 'none';
+ document.getElementById('formSuccessMsg').style.display = 'block';
 }
 
-function showBusPassConfirmation(formData) {
-  let passInfo = 'Bus Pass Purchased:\n\n';
-  formData.forEach((value, key) => {
-    if (!['idProof', 'schoolIdProof', 'ageProof'].includes(key)) {
-      passInfo += `${key.replace(/([A-Z])/g, ' $1')}: ${value}\n`;
-    }
-  });
-  alert(passInfo);
+// Complete payment simulation
+function completePayment() {
+ document.getElementById('paymentPage').classList.add('hidden');
+ document.getElementById('formSuccessMsg').style.display = 'block';
 }
+
+// Back to form from payment page
+function goBackToForm() {
+ if(!document.getElementById('monthlyForm').classList.contains('hidden'))
+document.getElementById('monthlyForm').classList.remove('hidden');
+ else if(!document.getElementById('studentForm').classList.contains('hidden'))
+document.getElementById('studentForm').classList.remove('hidden');
+
+ document.getElementById('paymentPage').classList.add('hidden');
+}
+
+// Attach click events for bus pass buttons
+document.querySelector('.bus-pass-card:nth-child(1) .buy-link').onclick = e => { e.preventDefault(); openPassModal('monthly'); };
+document.querySelector('.bus-pass-card:nth-child(2) .buy-link').onclick = e => { e.preventDefault(); openPassModal('student'); };
+document.querySelector('.bus-pass-card:nth-child(3) .buy-link').onclick = e => { e.preventDefault(); openPassModal('senior'); };
