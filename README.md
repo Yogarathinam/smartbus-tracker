@@ -1,7 +1,7 @@
 # 🚌 SmartBus Tracker
 **Real-Time Public Transport Tracking for Small Cities**  
 *SIH 2025 | Problem Statement ID: 25013*
-
+#**REJECTED DUE TO INTERNAL POLITICS**
 ---
 
 ## 📖 Problem Statement
