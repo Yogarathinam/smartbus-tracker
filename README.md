@@ -9,6 +9,8 @@
 In small cities and tier-2 towns, public transport systems **lack real-time tracking**, causing unpredictable bus schedules, overcrowding, and wasted commuter time. Limited digital infrastructure worsens delays and reduces reliance on public transport.
 
 ---
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/541e661e-e35a-4aa6-acbe-c2b96fcecdae" />
+
 
 ## 🌍 Why This Matters
 - Over **60% of commuters** face delays due to lack of live information.  
@@ -16,6 +18,7 @@ In small cities and tier-2 towns, public transport systems **lack real-time trac
 - Reliable real-time tracking **enhances commuter experience** and promotes **sustainable mobility**.
 
 ---
+<img width="537" height="550" alt="image" src="https://github.com/user-attachments/assets/e7b46fb0-1406-4e87-88ab-2f8fbcb8dd27" />
 
 ## 🎯 Our Solution
 **SmartBus Tracker** is a **mobile-first web platform** that:  
