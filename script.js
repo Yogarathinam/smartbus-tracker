@@ -221,8 +221,7 @@
 ];
 
 
-       // const GEMINI_API_KEY = "AIzaSyC3TUiL76PBczdpugKO9cKTCeunLTzZVQA";
-
+      
         // Login state management
         let currentUser = null;
         let otpTimer = null;
@@ -1537,3 +1536,4 @@ document.getElementById('studentForm').classList.remove('hidden');
 document.querySelector('.bus-pass-card:nth-child(1) .buy-link').onclick = e => { e.preventDefault(); openPassModal('monthly'); };
 document.querySelector('.bus-pass-card:nth-child(2) .buy-link').onclick = e => { e.preventDefault(); openPassModal('student'); };
 document.querySelector('.bus-pass-card:nth-child(3) .buy-link').onclick = e => { e.preventDefault(); openPassModal('senior'); };
+
